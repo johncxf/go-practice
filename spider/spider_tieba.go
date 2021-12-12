@@ -9,10 +9,10 @@ import (
 	"time"
 )
 
-var workDir = "./tmp/"
+var outputDir = "./tmp/"
 
 // 判断所给路径文件/文件夹是否存在
-func pathExists(path string) bool {
+func FileExists(path string) bool {
 	//os.Stat获取文件信息
 	_, err := os.Stat(path)
 	if err != nil {
@@ -25,24 +25,24 @@ func pathExists(path string) bool {
 }
 
 // 初始化环境
-func initEnv() {
-	if pathExists(workDir) {
-		rErr := os.RemoveAll(workDir)
+func InitEnv() {
+	if FileExists(outputDir) {
+		rErr := os.RemoveAll(outputDir)
 		if rErr != nil {
 			fmt.Println("清理目录失败:", rErr)
 			return
 		}
 		fmt.Println("清理目录")
 	}
-	mErr := os.Mkdir(workDir, os.ModePerm)
+	mErr := os.Mkdir(outputDir, os.ModePerm)
 	if mErr != nil {
 		fmt.Println("创建目录失败:", mErr)
 		return
 	}
-	fmt.Println("创建目录:", workDir)
+	fmt.Println("创建目录:", outputDir)
 }
 
-func HttpGet2(url string) (result string, err error) {
+func HttpGet(url string) (result string, err error) {
 	resp, err1 := http.Get(url)
 	if err1 != nil {
 		err = err1 // 将封装函数内部的错误，传出给调用者。
@@ -73,14 +73,14 @@ func HttpGet2(url string) (result string, err error) {
 // 爬取单个页面的函数
 func SpiderPage(i int, page chan int) {
 	url := "https://tieba.baidu.com/f?kw=%E7%BB%9D%E5%9C%B0%E6%B1%82%E7%94%9F&ie=utf-8&pn=" + strconv.Itoa((i-1)*50)
-	result, err := HttpGet2(url)
+	result, err := HttpGet(url)
 	if err != nil {
 		fmt.Println("HttpGet err:", err)
 		return
 	}
-	//fmt.Println("result=", result)
+
 	// 将读到的整网页数据，保存成一个文件
-	f, err := os.Create(workDir + "第 " + strconv.Itoa(i) + " 页" + ".html")
+	f, err := os.Create(outputDir + "page_" + strconv.Itoa(i) + ".html")
 	if err != nil {
 		fmt.Println("Create err:", err)
 		return
@@ -92,7 +92,8 @@ func SpiderPage(i int, page chan int) {
 }
 
 // 爬取页面操作。
-func working(start, end int) {
+func Spider(start, end int) {
+	startTime := time.Now()
 	fmt.Printf("正在爬取第%d页到%d页....\n", start, end)
 
 	page := make(chan int)
@@ -105,6 +106,9 @@ func working(start, end int) {
 	for i := start; i <= end; i++ {
 		fmt.Printf("第 %d 个页面爬取完成\n", <-page)
 	}
+	endTime := time.Now()
+	consume := endTime.Sub(startTime).Seconds()
+	fmt.Println("爬取耗时(s)：", consume)
 }
 
 func main() {
@@ -115,11 +119,9 @@ func main() {
 	fmt.Print("请输入爬取的终止页（>=start）:")
 	fmt.Scan(&end)
 
-	initEnv()
+	// 初始化目录
+	InitEnv()
 
-	startTime := time.Now()
-	working(start, end)
-	endTime := time.Now()
-	consume := endTime.Sub(startTime).Seconds()
-	fmt.Println("程序执行耗时(s)：", consume)
+	// 爬取
+	Spider(start, end)
 }

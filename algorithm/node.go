@@ -7,7 +7,7 @@ import (
 // 定义节点
 type Node struct {
 	Value int
-	Next *Node
+	Next  *Node
 }
 
 // 初始化头结点
@@ -112,7 +112,7 @@ func printListFromTailToHead(head *Node) []int {
  * @param k int整型
  * @return ListNode类
  */
-func FindKthToTail(pHead *ListNode,  k int) *ListNode {
+func FindKthToTail(pHead *Node, k int) *Node {
 	// 边界值
 	if pHead == nil || k <= 0 {
 		return nil
