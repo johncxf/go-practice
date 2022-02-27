@@ -1,3 +1,4 @@
+// 单链表
 package main
 
 import (
@@ -156,6 +157,6 @@ func main() {
 	// 再次遍历
 	traverse(head)
 
-	res := printListFromTailToHead(head)
-	fmt.Println(res)
+	// res := printListFromTailToHead(head)
+	// fmt.Println(res)
 }
