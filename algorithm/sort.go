@@ -52,10 +52,26 @@ func quickSort(arr []int, left int, right int) {
 	quickSort(arr, j+1, right)
 }
 
+// 选择排序
+func selectSort(arr []int) []int {
+	length := len(arr)
+	for i := 0; i < length-1; i++ {
+		min := i
+		for j := i + 1; j < length; j++ {
+			if arr[min] > arr[j] {
+				min = j
+			}
+		}
+		arr[i], arr[min] = arr[min], arr[i]
+	}
+	return arr
+}
+
 func main() {
-	// arr := []int{4, 5, 6, 7, 8, 3, 2, 1}
-	// arr = bubbleSort(arr)
-	arr := []int{6, 1, 2, 7, 9, 3, 4, 5, 10, 8}
-	quickSort(arr, 0, len(arr)-1)
+	arr := []int{4, 5, 6, 7, 8, 3, 2, 1}
+	arr = bubbleSort(arr)
+	// arr := []int{6, 1, 2, 7, 9, 3, 4, 5, 10, 8}
+	// quickSort(arr, 0, len(arr)-1)
+	// arr = selectSort(arr)
 	fmt.Println(arr)
 }
