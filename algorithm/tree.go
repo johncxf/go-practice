@@ -5,15 +5,15 @@ import (
 )
 
 // 通过链表存储二叉树节点信息
-type Node struct {
+type TreeNode struct {
 	Data  interface{}
-	Left  *Node
-	Right *Node
+	Left  *TreeNode
+	Right *TreeNode
 }
 
 // 初始化根节点
-func NewNode(data interface{}) *Node {
-	return &Node{
+func NewNode(data interface{}) *TreeNode {
+	return &TreeNode{
 		Data:  data,
 		Left:  nil,
 		Right: nil,
@@ -21,12 +21,12 @@ func NewNode(data interface{}) *Node {
 }
 
 // 实现接口方法
-func (node *Node) GetData() string {
+func (node *TreeNode) GetData() string {
 	return fmt.Sprintf("%v", node.Data)
 }
 
 // 前序遍历
-func preOrderTraverse(treeNode *Node) {
+func preOrderTraverse(treeNode *TreeNode) {
 	// 节点为空则退出当前递归
 	if treeNode == nil {
 		return
@@ -41,7 +41,7 @@ func preOrderTraverse(treeNode *Node) {
 }
 
 // 中序遍历
-func midOrderTraverse(treeNode *Node) {
+func midOrderTraverse(treeNode *TreeNode) {
 	// 节点为空则退出当前递归
 	if treeNode == nil {
 		return
@@ -55,7 +55,7 @@ func midOrderTraverse(treeNode *Node) {
 }
 
 // 后序遍历
-func postOrderTraverse(treeNode *Node) {
+func postOrderTraverse(treeNode *TreeNode) {
 	// 节点为空则退出当前递归
 	if treeNode == nil {
 		return
@@ -66,6 +66,20 @@ func postOrderTraverse(treeNode *Node) {
 	postOrderTraverse(treeNode.Right)
 	// 最后访问根节点
 	fmt.Printf("%s ", treeNode.GetData())
+}
+
+/**
+ * 二叉树的镜像
+ *
+ * @param pRoot TreeNode 类 
+ * @return TreeNode 类
+*/
+func Mirror(pRoot *TreeNode) *TreeNode {
+    if nil == pRoot {
+        return pRoot
+    }
+    pRoot.Left, pRoot.Right = Mirror(pRoot.Right), Mirror(pRoot.Left)
+    return pRoot
 }
 
 // 测试代码
@@ -82,13 +96,17 @@ func main() {
 	preOrderTraverse(node1)
 	fmt.Println()
 
-	// 中序遍历这个二叉树
-	fmt.Print("中序遍历: ")
-	midOrderTraverse(node1)
-	fmt.Println()
+	// // 中序遍历这个二叉树
+	// fmt.Print("中序遍历: ")
+	// midOrderTraverse(node1)
+	// fmt.Println()
 
-	// 后序遍历这个二叉树
-	fmt.Print("后序遍历: ")
-	postOrderTraverse(node1)
-	fmt.Println()
+	// // 后序遍历这个二叉树
+	// fmt.Print("后序遍历: ")
+	// postOrderTraverse(node1)
+	// fmt.Println()
+
+
+	// Mirror(node1)
+	// preOrderTraverse(node1)
 }
