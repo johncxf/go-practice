@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-    . "struct"
+    . "go_practice/pkg/datastruct"
 )
 
 /**

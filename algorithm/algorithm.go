@@ -87,7 +87,7 @@ func multiplyB( A []int ) []int {
  * @param num2 int整型
  * @return int整型
  */
-func Add(num1 int, num2 int) int {
+func add(num1 int, num2 int) int {
 	for num2 != 0 {
 		c := (num1 & num2) << 1		//进位
 		num1 ^= num2				//非进位和
@@ -120,7 +120,7 @@ func replaceSpace(s string) string {
  * @param str string字符串
  * @return int整型
  */
-func FirstNotRepeatingChar(str string) int {
+func firstNotRepeatingChar(str string) int {
 	if len(str) == 0 {
 		return -1
 	}
@@ -211,7 +211,7 @@ func main() {
 
 	//num1 := 1
 	//num2 := 2
-	//res := Add(num1, num2)
+	//res := add(num1, num2)
 
 	//addNode(head, 6)
 	//

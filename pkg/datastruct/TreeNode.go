@@ -1,6 +1,6 @@
-// 二叉树
-package struct
+package datastruct
 
+// 二叉树
 type TreeNode struct {
     Val int
     Left *TreeNode
