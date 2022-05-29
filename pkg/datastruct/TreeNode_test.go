@@ -1,12 +1,12 @@
-package main
+package datastruct
 
 import (
-    "fmt"
-    . "go_practice/pkg/datastruct"
+	"fmt"
+	"testing"
 )
 
-func main() {
-    node1 := NewTreeNode(1) // 根节点
+func TestTreeNode(t *testing.T) {
+	node1 := NewTreeNode(1) // 根节点
 	node2 := NewTreeNode(2)
 	node3 := NewTreeNode(3)
 	node4 := NewTreeNode(4)
@@ -42,6 +42,4 @@ func main() {
 	fmt.Print("层次遍历: ")
 	LevelOrderTraverseTreeNode(node1)
 	fmt.Println()
-
-	// fmt.Println("hello, world")
 }

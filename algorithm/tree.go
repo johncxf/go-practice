@@ -74,11 +74,11 @@ func postOrderTraverse(treeNode *TreeNode) {
  * @param pRoot TreeNode 类 
  * @return TreeNode 类
 */
-func Mirror(pRoot *TreeNode) *TreeNode {
+func mirror(pRoot *TreeNode) *TreeNode {
     if nil == pRoot {
         return pRoot
     }
-    pRoot.Left, pRoot.Right = Mirror(pRoot.Right), Mirror(pRoot.Left)
+    pRoot.Left, pRoot.Right = mirror(pRoot.Right), mirror(pRoot.Left)
     return pRoot
 }
 
@@ -107,6 +107,6 @@ func main() {
 	// fmt.Println()
 
 
-	// Mirror(node1)
+	// mirror(node1)
 	// preOrderTraverse(node1)
 }
