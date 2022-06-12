@@ -42,4 +42,9 @@ func TestTreeNode(t *testing.T) {
 	fmt.Print("层次遍历: ")
 	LevelOrderTraverseTreeNode(node1)
 	fmt.Println()
+
+	// 将数组转化成二叉树
+	testNode := TransformArrayToTreeNode([]int{5,4,8,11,NULL,13,4,7,2,NULL,NULL,5,1})
+	LevelOrderTraverseTreeNode(testNode)
+	fmt.Println()
 }

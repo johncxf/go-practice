@@ -20,6 +20,22 @@ func NewTreeNode(data int) *TreeNode {
     }
 }
 
+// // 定义二叉树
+// type TreeNode struct {
+//     Val interface{}
+//     Left *TreeNode
+//     Right *TreeNode
+// }
+
+// // 初始化节点
+// func NewTreeNode(data interface{}) *TreeNode {
+// 	return &TreeNode{
+// 		Val: data,
+//         Left: nil,
+//         Right: nil,
+// 	}
+// }
+
 // 前序遍历
 func PreOrderTraverseTreeNode(treeNode *TreeNode) {
 	// 节点为空则退出当前递归
@@ -84,4 +100,39 @@ func LevelOrderTraverseTreeNode(treeNode *TreeNode) {
             tmp = append(tmp, current.Right)
         }
     }
+}
+
+var NULL = -1 << 63
+
+// 将数组转化成二叉树
+func TransformArrayToTreeNode(data []int) *TreeNode {
+	n := len(data)
+	if 0 == n {
+		return nil
+	}
+
+	root := NewTreeNode(data[0])
+
+	queue := make([]*TreeNode, 1)
+	queue[0] = root
+
+	i := 1
+	for i < n {
+		node := queue[0]
+		queue = queue[1:]
+
+		if i < n && data[i] != NULL {
+			node.Left = NewTreeNode(data[i])
+			queue = append(queue, node.Left)
+		}
+		i++
+
+		if i < n && data[i] != NULL {
+			node.Right = NewTreeNode(data[i])
+			queue = append(queue, node.Right)
+		}
+		i++
+	}
+
+	return root
 }
