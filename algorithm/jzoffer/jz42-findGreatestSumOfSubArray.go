@@ -6,7 +6,7 @@ import (
 )
 
 /**
- * [JZ44-简单] 数字序列中某一位的数字
+ * [JZ42-简单] 连续子数组的最大和
  *
  * @param array int 一维数组
  * @return int
