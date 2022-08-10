@@ -1,23 +1,23 @@
 package datastruct
 
 import (
-    "fmt"
+	"fmt"
 )
 
 // 二叉树
 type TreeNode struct {
-    Val int
-    Left *TreeNode
-    Right *TreeNode
+	Val   int
+	Left  *TreeNode
+	Right *TreeNode
 }
 
 // 初始化节点
 func NewTreeNode(data int) *TreeNode {
-    return &TreeNode{
-        Val: data,
-        Left: nil,
-        Right: nil,
-    }
+	return &TreeNode{
+		Val:   data,
+		Left:  nil,
+		Right: nil,
+	}
 }
 
 // // 定义二叉树
@@ -83,23 +83,23 @@ func PostOrderTraverseTreeNode(treeNode *TreeNode) {
 
 // 层次遍历
 func LevelOrderTraverseTreeNode(treeNode *TreeNode) {
-    if nil == treeNode {
-        return
-    }
-    
-    tmp := []*TreeNode{treeNode}
-    for i := 0; i < len(tmp); i++ {
-        current := tmp[i]
+	if nil == treeNode {
+		return
+	}
+
+	tmp := []*TreeNode{treeNode}
+	for i := 0; i < len(tmp); i++ {
+		current := tmp[i]
 
 		fmt.Printf("%v ", current.Val)
 
 		if nil != current.Left {
-            tmp = append(tmp, current.Left)
-        }
-        if nil != current.Right {
-            tmp = append(tmp, current.Right)
-        }
-    }
+			tmp = append(tmp, current.Left)
+		}
+		if nil != current.Right {
+			tmp = append(tmp, current.Right)
+		}
+	}
 }
 
 var NULL = -1 << 63

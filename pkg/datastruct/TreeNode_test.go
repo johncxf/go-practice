@@ -15,7 +15,7 @@ func TestTreeNode(t *testing.T) {
 	node7 := NewTreeNode(7)
 	node8 := NewTreeNode(8)
 
-    node1.Left = node2
+	node1.Left = node2
 	node1.Right = node3
 	node2.Left = node4
 	node2.Right = node5
@@ -28,7 +28,7 @@ func TestTreeNode(t *testing.T) {
 	PreOrderTraverseTreeNode(node1)
 	fmt.Println()
 
-    // 中序遍历二叉树
+	// 中序遍历二叉树
 	fmt.Print("中序遍历: ")
 	MidOrderTraverseTreeNode(node1)
 	fmt.Println()
@@ -44,7 +44,7 @@ func TestTreeNode(t *testing.T) {
 	fmt.Println()
 
 	// 将数组转化成二叉树
-	testNode := TransformArrayToTreeNode([]int{5,4,8,11,NULL,13,4,7,2,NULL,NULL,5,1})
+	testNode := TransformArrayToTreeNode([]int{5, 4, 8, 11, NULL, 13, 4, 7, 2, NULL, NULL, 5, 1})
 	LevelOrderTraverseTreeNode(testNode)
 	fmt.Println()
 }

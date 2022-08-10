@@ -1,6 +1,6 @@
 package datastruct
 
 type QueueNode struct {
-    Val int
-    Next  *QueueNode
+	Val  int
+	Next *QueueNode
 }
