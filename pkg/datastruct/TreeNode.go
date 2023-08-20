@@ -4,14 +4,14 @@ import (
 	"fmt"
 )
 
-// 二叉树
+// TreeNode 二叉树
 type TreeNode struct {
 	Val   int
 	Left  *TreeNode
 	Right *TreeNode
 }
 
-// 初始化节点
+// NewTreeNode 初始化节点
 func NewTreeNode(data int) *TreeNode {
 	return &TreeNode{
 		Val:   data,
@@ -36,7 +36,7 @@ func NewTreeNode(data int) *TreeNode {
 // 	}
 // }
 
-// 前序遍历
+// PreOrderTraverseTreeNode 前序遍历
 func PreOrderTraverseTreeNode(treeNode *TreeNode) {
 	// 节点为空则退出当前递归
 	if treeNode == nil {
@@ -51,7 +51,7 @@ func PreOrderTraverseTreeNode(treeNode *TreeNode) {
 	PreOrderTraverseTreeNode(treeNode.Right)
 }
 
-// 中序遍历
+// MidOrderTraverseTreeNode 中序遍历
 func MidOrderTraverseTreeNode(treeNode *TreeNode) {
 	// 节点为空则退出当前递归
 	if treeNode == nil {
@@ -66,7 +66,7 @@ func MidOrderTraverseTreeNode(treeNode *TreeNode) {
 	MidOrderTraverseTreeNode(treeNode.Right)
 }
 
-// 后序遍历
+// PostOrderTraverseTreeNode 后序遍历
 func PostOrderTraverseTreeNode(treeNode *TreeNode) {
 	// 节点为空则退出当前递归
 	if treeNode == nil {
@@ -81,7 +81,7 @@ func PostOrderTraverseTreeNode(treeNode *TreeNode) {
 	fmt.Printf("%v ", treeNode.Val)
 }
 
-// 层次遍历
+// LevelOrderTraverseTreeNode 层次遍历
 func LevelOrderTraverseTreeNode(treeNode *TreeNode) {
 	if nil == treeNode {
 		return
@@ -104,7 +104,7 @@ func LevelOrderTraverseTreeNode(treeNode *TreeNode) {
 
 var NULL = -1 << 63
 
-// 将数组转化成二叉树
+// TransformArrayToTreeNode 将数组转化成二叉树
 func TransformArrayToTreeNode(data []int) *TreeNode {
 	n := len(data)
 	if 0 == n {
