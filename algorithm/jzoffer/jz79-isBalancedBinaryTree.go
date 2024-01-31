@@ -2,28 +2,28 @@ package main
 
 import (
 	"fmt"
-    . "go_practice/pkg/datastruct"
+	. "go_practice/pkg/datastruct"
 )
 
 /**
  * [JZ79-简单] 判断是否是平衡二叉树
  *
- * @param pRoot TreeNode类 
+ * @param pRoot TreeNode类
  * @return bool布尔型
-*/
+ */
 func isBalancedBinaryTree(pRoot *TreeNode) bool {
-    return treeDepth(pRoot) > -1
+	return treeDepth1(pRoot) > -1
 }
 
-func treeDepth(root *TreeNode) int {
+func treeDepth1(root *TreeNode) int {
 	if nil == root {
 		return 0
 	}
 
-	leftLength := treeDepth(root.Left);
-	rightLength := treeDepth(root.Right);
+	leftLength := treeDepth1(root.Left)
+	rightLength := treeDepth1(root.Right)
 
-	if -1 == leftLength || -1 == rightLength || 1 < abs(leftLength - rightLength) {
+	if -1 == leftLength || -1 == rightLength || 1 < abs(leftLength-rightLength) {
 		return -1
 	}
 
@@ -31,10 +31,10 @@ func treeDepth(root *TreeNode) int {
 }
 
 func abs(a int) int {
-    if 0 > a {
-        return -a
-    }
-    return a
+	if 0 > a {
+		return -a
+	}
+	return a
 }
 
 func max(a, b int) int {

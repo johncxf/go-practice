@@ -6,18 +6,18 @@ import (
 )
 
 func TestAddNode(t *testing.T) {
-	head = nil
-	fmt.Println(AddNode(head, 1))
-	fmt.Println(AddNode(head, 2))
-	fmt.Println(AddNode(head, 2))
+	Head = nil
+	fmt.Println(AddNode(Head, 1))
+	fmt.Println(AddNode(Head, 2))
+	fmt.Println(AddNode(Head, 3))
 }
 
-func TestListNode(t *testing.T) {
-	head = nil
-	AddNode(head, 1)
-	AddNode(head, 2)
-	AddNode(head, 2)
+func TestTraverseSingleList(t *testing.T) {
+	Head = nil
+	AddNode(Head, 1)
+	AddNode(Head, 2)
+	AddNode(Head, 3)
 
 	// 遍历链表
-	TraverseSingleList(head)
+	TraverseSingleList(Head)
 }
