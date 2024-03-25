@@ -4,8 +4,7 @@ import "fmt"
 
 // [L64-中等] 最小路径和
 func minPathSum(grid [][]int) int {
-	m := len(grid)
-	n := len(grid[0])
+	m, n := len(grid), len(grid[0])
 	dp := make([][]int, m)
 	for i := range dp {
 		dp[i] = make([]int, n)
