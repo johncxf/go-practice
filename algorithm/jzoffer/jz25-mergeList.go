@@ -38,13 +38,13 @@ func main() {
 	var head1 *ListNode
 	var head2 *ListNode
 
-	head1 = AddNode2(head1, 1)
-	head1 = AddNode2(head1, 3)
-	head1 = AddNode2(head1, 5)
+	head1 = AddNode(head1, 1)
+	head1 = AddNode(head1, 3)
+	head1 = AddNode(head1, 5)
 
-	head2 = AddNode2(head2, 2)
-	head2 = AddNode2(head2, 4)
-	head2 = AddNode2(head2, 6)
+	head2 = AddNode(head2, 2)
+	head2 = AddNode(head2, 4)
+	head2 = AddNode(head2, 6)
 
 	rHead := mergeList(head1, head2)
 	TraverseSingleList(rHead)

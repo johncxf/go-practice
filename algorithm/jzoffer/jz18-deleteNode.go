@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	. "go_practice/pkg/datastruct"
 )
 
@@ -29,14 +28,12 @@ func deleteNode(head *ListNode, val int) *ListNode {
 }
 
 func main() {
-	fmt.Println("")
 	var head1 *ListNode
-
-	head1 = AddNode2(head1, 1)
-	head1 = AddNode2(head1, 2)
-	head1 = AddNode2(head1, 3)
-	head1 = AddNode2(head1, 6)
-	head1 = AddNode2(head1, 7)
+	head1 = AddNode(head1, 1)
+	head1 = AddNode(head1, 2)
+	head1 = AddNode(head1, 3)
+	head1 = AddNode(head1, 6)
+	head1 = AddNode(head1, 7)
 
 	rHead := deleteNode(head1, 3)
 	TraverseSingleList(rHead)

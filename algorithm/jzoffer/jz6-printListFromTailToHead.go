@@ -25,10 +25,9 @@ func printListFromTailToHead(head *ListNode) []int {
 }
 
 func main() {
-	fmt.Println("")
-	Head = nil
-	AddNode(Head, 1)
-	AddNode(Head, 2)
-	AddNode(Head, 3)
-	fmt.Println(printListFromTailToHead(Head))
+	var head1 *ListNode
+	head1 = AddNode(head1, 1)
+	head1 = AddNode(head1, 2)
+	head1 = AddNode(head1, 3)
+	fmt.Println(printListFromTailToHead(head1))
 }

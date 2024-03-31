@@ -37,13 +37,13 @@ func main() {
 	fmt.Println("")
 	var head1 *ListNode
 
-	head1 = AddNode2(head1, 1)
-	head1 = AddNode2(head1, 2)
-	head1 = AddNode2(head1, 3)
-	head1 = AddNode2(head1, 3)
-	head1 = AddNode2(head1, 4)
-	head1 = AddNode2(head1, 4)
-	head1 = AddNode2(head1, 5)
+	head1 = AddNode(head1, 1)
+	head1 = AddNode(head1, 2)
+	head1 = AddNode(head1, 3)
+	head1 = AddNode(head1, 3)
+	head1 = AddNode(head1, 4)
+	head1 = AddNode(head1, 4)
+	head1 = AddNode(head1, 5)
 
 	rHead := deleteDuplication(head1)
 	TraverseSingleList(rHead)

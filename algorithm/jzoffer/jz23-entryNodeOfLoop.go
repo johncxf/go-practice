@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	. "go_practice/pkg/datastruct"
 )
 
@@ -32,16 +31,14 @@ func entryNodeOfLoop(pHead *ListNode) *ListNode {
 }
 
 func main() {
-	fmt.Println("")
-	Head = nil
-	AddNode(Head, 1)
-	AddNode(Head, 2)
-	AddNode(Head, 3)
-	AddNode(Head, 4)
-	AddNode(Head, 5)
+	var head1 *ListNode
+	head1 = AddNode(head1, 1)
+	head1 = AddNode(head1, 2)
+	head1 = AddNode(head1, 3)
+	head1 = AddNode(head1, 4)
+	head1 = AddNode(head1, 5)
 
-	//kHead := reverseList(Head)
-	kHead := reverseList2(Head)
+	kHead := reverseList2(head1)
 
 	TraverseSingleList(kHead)
 }
