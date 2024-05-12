@@ -2,6 +2,7 @@ package main
 
 import "fmt"
 
+// [L169-简单] 多数元素
 func majorityElement(nums []int) int {
 	hash := map[int]int{}
 	for _, num := range nums {
