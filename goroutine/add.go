@@ -7,7 +7,7 @@ import (
 )
 
 // 两数相加
-func add(a, b int) {
+func add1(a, b int) {
 	var c = a + b
 	fmt.Printf("%d + %d = %d\n", a, b, c)
 }
@@ -16,7 +16,7 @@ func add(a, b int) {
 func main() {
 	for i := 0; i < 10; i++ {
 		// 协程调用
-		go add(1, i)
+		go add1(1, i)
 	}
 	// 让主协程等待 1s 后退出
 	time.Sleep(1e9)

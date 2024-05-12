@@ -12,7 +12,7 @@ import (
 var counter int = 0
 
 // 加法
-func add(a, b int, lock *sync.Mutex) {
+func add3(a, b int, lock *sync.Mutex) {
 	c := a + b
 	lock.Lock()
 	counter++
@@ -25,7 +25,7 @@ func main() {
 	// 锁机制
 	lock := &sync.Mutex{}
 	for i := 0; i < 10; i++ {
-		go add(1, i, lock)
+		go add3(1, i, lock)
 	}
 
 	for {

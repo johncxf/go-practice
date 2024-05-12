@@ -13,7 +13,7 @@ import (
 var outputDir = "./tmp/"
 
 // 判断所给路径文件/文件夹是否存在
-func FileExists(path string) bool {
+func fileExists(path string) bool {
 	//os.Stat获取文件信息
 	_, err := os.Stat(path)
 	if err != nil {
@@ -26,8 +26,8 @@ func FileExists(path string) bool {
 }
 
 // 初始化环境
-func InitEnv() {
-	if FileExists(outputDir) {
+func initEnv() {
+	if fileExists(outputDir) {
 		rErr := os.RemoveAll(outputDir)
 		if rErr != nil {
 			fmt.Println("清理目录失败:", rErr)
@@ -44,7 +44,7 @@ func InitEnv() {
 }
 
 // 爬取指定 url 的页面
-func HttpGet(url string) (result string, err error) {
+func httpGet(url string) (result string, err error) {
 	client := &http.Client{}
 	resp, err1 := http.NewRequest("GET", url, nil)
 	resp.Header.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36 OPR/66.0.3515.115")
@@ -73,7 +73,7 @@ func HttpGet(url string) (result string, err error) {
 }
 
 // 写入文件
-func Savefile(idx int, filmName, filmScore, peopleNum [][]string) {
+func savefile(idx int, filmName, filmScore, peopleNum [][]string) {
 	path := outputDir + "page_" + strconv.Itoa(idx) + ".txt"
 	f, err := os.Create(path)
 	if err != nil {
@@ -90,14 +90,14 @@ func Savefile(idx int, filmName, filmScore, peopleNum [][]string) {
 }
 
 // 爬取一个豆瓣页面数据信息
-func SpiderPage(idx int, page chan int) {
+func spiderPage(idx int, page chan int) {
 	// 获取 url
 	url := "https://movie.douban.com/top250?start=" + strconv.Itoa((idx-1)*25) + "&filter="
 
 	// 爬取 url 对应页面
-	result, err := HttpGet(url)
+	result, err := httpGet(url)
 	if err != nil {
-		fmt.Println("HttpGet err:", err)
+		fmt.Println("httpGet err:", err)
 		return
 	}
 
@@ -114,13 +114,13 @@ func SpiderPage(idx int, page chan int) {
 	peopleNum := ret3.FindAllStringSubmatch(result, -1)
 
 	// 写入文件
-	Savefile(idx, filmName, filmScore, peopleNum)
+	savefile(idx, filmName, filmScore, peopleNum)
 
 	page <- idx
 }
 
 // 爬取
-func Spider(start, end int) {
+func spider(start, end int) {
 	// 当前时间
 	startTime := time.Now()
 	fmt.Printf("正在爬取 %d 到 %d 页...\n", start, end)
@@ -150,8 +150,8 @@ func main() {
 	fmt.Scan(&end)
 
 	// 初始化目录
-	InitEnv()
+	initEnv()
 
 	// 爬取
-	Spider(start, end)
+	spider(start, end)
 }

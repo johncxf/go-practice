@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-func add(a, b int, ch chan int) {
+func add2(a, b int, ch chan int) {
 	c := a + b
 	fmt.Printf("%d + %d = %d\n", a, b, c)
 	// 发送数据到 channel
@@ -19,7 +19,7 @@ func main() {
 	chs := make([]chan int, 10)
 	for i := 0; i < 10; i++ {
 		chs[i] = make(chan int)
-		go add(1, i, chs[i])
+		go add2(1, i, chs[i])
 	}
 	for _, ch := range chs {
 		// 接收数据

@@ -9,7 +9,7 @@ import (
 	"time"
 )
 
-var outputDir = "./tmp/"
+var outputDir1 = "./tmp/"
 
 // 判断所给路径文件/文件夹是否存在
 func FileExists(path string) bool {
@@ -25,24 +25,24 @@ func FileExists(path string) bool {
 }
 
 // 初始化环境
-func InitEnv() {
-	if FileExists(outputDir) {
-		rErr := os.RemoveAll(outputDir)
+func initEnv1() {
+	if FileExists(outputDir1) {
+		rErr := os.RemoveAll(outputDir1)
 		if rErr != nil {
 			fmt.Println("清理目录失败:", rErr)
 			return
 		}
 		fmt.Println("清理目录")
 	}
-	mErr := os.Mkdir(outputDir, os.ModePerm)
+	mErr := os.Mkdir(outputDir1, os.ModePerm)
 	if mErr != nil {
 		fmt.Println("创建目录失败:", mErr)
 		return
 	}
-	fmt.Println("创建目录:", outputDir)
+	fmt.Println("创建目录:", outputDir1)
 }
 
-func HttpGet(url string) (result string, err error) {
+func httpGet1(url string) (result string, err error) {
 	resp, err1 := http.Get(url)
 	if err1 != nil {
 		err = err1
@@ -71,16 +71,16 @@ func HttpGet(url string) (result string, err error) {
 }
 
 // 爬取单个页面的函数
-func SpiderPage(i int, page chan int) {
+func spider1Page(i int, page chan int) {
 	url := "https://tieba.baidu.com/f?kw=%E7%BB%9D%E5%9C%B0%E6%B1%82%E7%94%9F&ie=utf-8&pn=" + strconv.Itoa((i-1)*50)
-	result, err := HttpGet(url)
+	result, err := httpGet1(url)
 	if err != nil {
-		fmt.Println("HttpGet err:", err)
+		fmt.Println("httpGet1 err:", err)
 		return
 	}
 
 	// 将读到的整网页数据，保存成一个文件
-	f, err := os.Create(outputDir + "page_" + strconv.Itoa(i) + ".html")
+	f, err := os.Create(outputDir1 + "page_" + strconv.Itoa(i) + ".html")
 	if err != nil {
 		fmt.Println("Create err:", err)
 		return
@@ -92,7 +92,7 @@ func SpiderPage(i int, page chan int) {
 }
 
 // 爬取页面操作。
-func Spider(start, end int) {
+func spider1(start, end int) {
 	startTime := time.Now()
 	fmt.Printf("正在爬取第%d页到%d页....\n", start, end)
 
@@ -100,7 +100,7 @@ func Spider(start, end int) {
 
 	// 循环爬取每一页数据
 	for i := start; i <= end; i++ {
-		go SpiderPage(i, page)
+		go spider1Page(i, page)
 	}
 
 	for i := start; i <= end; i++ {
@@ -120,8 +120,8 @@ func main() {
 	fmt.Scan(&end)
 
 	// 初始化目录
-	InitEnv()
+	initEnv1()
 
 	// 爬取
-	Spider(start, end)
+	spider1(start, end)
 }
