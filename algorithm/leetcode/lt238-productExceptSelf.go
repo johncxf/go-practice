@@ -2,6 +2,7 @@ package main
 
 import "fmt"
 
+// [L238-中等] 除自身以外数组的乘积
 func productExceptSelf(nums []int) []int {
 	n := len(nums)
 	// 初始化两个数组，分别存储 i 左右两侧的乘机
