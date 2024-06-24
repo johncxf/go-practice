@@ -27,6 +27,7 @@ func backtrackLetter(digits string, index int, combination string, res *[]string
 	}
 }
 
+// [L17-中等] 电话号码的字母组合
 func letterCombinations(digits string) []string {
 	if len(digits) == 0 {
 		return []string{}

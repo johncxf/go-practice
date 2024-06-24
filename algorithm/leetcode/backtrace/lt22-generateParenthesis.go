@@ -15,6 +15,7 @@ func backtrackGenPas(left, right, n int, state string, res *[]string) {
 	}
 }
 
+// [L22-中等] 括号生成
 func generateParenthesis(n int) []string {
 	res := make([]string, 0)
 	backtrackGenPas(0, 0, n, "", &res)
