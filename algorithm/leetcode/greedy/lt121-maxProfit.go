@@ -2,9 +2,9 @@ package main
 
 import "fmt"
 
+// [L121-简单] 买卖股票的最佳时机
 func maxProfit(prices []int) int {
-	minPro := int(1e5)
-	maxPro := 0
+	maxPro, minPro := 0, int(1e5)
 	for i := 0; i < len(prices); i++ {
 		if prices[i] < minPro {
 			minPro = prices[i]

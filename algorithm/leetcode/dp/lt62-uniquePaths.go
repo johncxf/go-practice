@@ -2,6 +2,7 @@ package main
 
 import "fmt"
 
+// [L62-中等] 不同路径
 func uniquePaths(m, n int) int {
 	dp := make([][]int, m)
 	for i := range dp {

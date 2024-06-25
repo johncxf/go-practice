@@ -5,27 +5,26 @@ import "fmt"
 // [L64-中等] 最小路径和
 func minPathSum(grid [][]int) int {
 	m, n := len(grid), len(grid[0])
-	dp := make([][]int, m)
-	for i := range dp {
-		dp[i] = make([]int, n)
-	}
-	dp[0][0] = grid[0][0]
+	// 直接以 grid 为 dp 表结构
+	// 初始化 dp[i][0]
 	for i := 1; i < m; i++ {
-		dp[i][0] = dp[i-1][0] + grid[i][0]
+		grid[i][0] = grid[i-1][0] + grid[i][0]
 	}
+	// 初始化 dp[0][j]
 	for j := 1; j < n; j++ {
-		dp[0][j] = dp[0][j-1] + grid[0][j]
+		grid[0][j] = grid[0][j-1] + grid[0][j]
 	}
+	// 求解
 	for i := 1; i < m; i++ {
 		for j := 1; j < n; j++ {
-			if dp[i-1][j] > dp[i][j-1] {
-				dp[i][j] = dp[i][j-1] + grid[i][j]
+			if grid[i-1][j] > grid[i][j-1] {
+				grid[i][j] = grid[i][j-1] + grid[i][j]
 			} else {
-				dp[i][j] = dp[i-1][j] + grid[i][j]
+				grid[i][j] = grid[i-1][j] + grid[i][j]
 			}
 		}
 	}
-	return dp[m-1][n-1]
+	return grid[m-1][n-1]
 }
 
 func main() {
