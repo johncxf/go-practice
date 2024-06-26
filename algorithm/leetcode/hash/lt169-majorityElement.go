@@ -4,10 +4,10 @@ import "fmt"
 
 // [L169-简单] 多数元素
 func majorityElement(nums []int) int {
-	hash := map[int]int{}
+	hash := make(map[int]int)
 	for _, num := range nums {
 		if _, ok := hash[num]; ok {
-			hash[num] = hash[num] + 1
+			hash[num]++
 		} else {
 			hash[num] = 1
 		}
