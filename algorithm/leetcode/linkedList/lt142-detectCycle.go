@@ -1,4 +1,4 @@
-// [L141-中等] 环形链表
+// [L142-中等] 环形链表 II
 package main
 
 import (
@@ -6,20 +6,18 @@ import (
 	. "go_practice/pkg/datastruct"
 )
 
-func hasCycle(head *ListNode) bool {
-	if head == nil {
-		return false
-	}
-
+func detectCycle(head *ListNode) *ListNode {
 	hash := map[*ListNode]struct{}{}
+	i := 0
 	for head != nil {
 		if _, ok := hash[head]; ok {
-			return true
+			return head
 		}
+		i++
 		hash[head] = struct{}{}
 		head = head.Next
 	}
-	return false
+	return nil
 }
 
 func main() {
@@ -28,5 +26,5 @@ func main() {
 	head1 = AddNode(head1, 2)
 	head1 = AddNode(head1, 0)
 	head1 = AddNode(head1, -4)
-	fmt.Println(hasCycle(head1))
+	fmt.Println(detectCycle(head1))
 }
