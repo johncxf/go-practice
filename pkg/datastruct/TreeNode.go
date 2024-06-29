@@ -102,6 +102,32 @@ func LevelOrderTraverseTreeNode(treeNode *TreeNode) {
 	}
 }
 
+// LevelOrderTraverseTreeNodeToArray 层次遍历二叉树，返回二维数组
+func LevelOrderTraverseTreeNodeToArray(treeNode *TreeNode) [][]int {
+	if treeNode == nil {
+		return nil
+	}
+	res := make([][]int, 0)
+	cur := []*TreeNode{treeNode}
+	for len(cur) > 0 {
+		// 收集当前层的所有值
+		level := make([]int, 0)
+		tmp := make([]*TreeNode, 0)
+		for _, node := range cur {
+			level = append(level, node.Val)
+			if node.Left != nil {
+				tmp = append(tmp, node.Left)
+			}
+			if node.Right != nil {
+				tmp = append(tmp, node.Right)
+			}
+		}
+		res = append(res, level)
+		cur = tmp
+	}
+	return res
+}
+
 var NULL = -1 << 63
 
 // TransformArrayToTreeNode 将数组转化成二叉树
