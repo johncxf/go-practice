@@ -67,6 +67,7 @@ func selectSort(arr []int) []int {
 	return arr
 }
 
+// 递归合并数组（从小到大）
 func merge(left []int, right []int) []int {
 	var result []int
 	for len(left) != 0 && len(right) != 0 {
@@ -99,11 +100,14 @@ func mergeSort(arr []int) []int {
 		return arr
 	}
 
+	// 递归的进行数组拆分
+	// 左区间：[left, mid]，右区间：[mid, right]
 	middle := length / 2
-	left := arr[0:middle]
-	right := arr[middle:]
+	left := mergeSort(arr[0:middle])
+	right := mergeSort(arr[middle:])
 
-	return merge(mergeSort(left), mergeSort(right))
+	// 递归进行数组合并
+	return merge(left, right)
 }
 
 func main() {

@@ -20,13 +20,6 @@ func NewTreeNode(data int) *TreeNode {
 	}
 }
 
-// // 定义二叉树
-// type TreeNode struct {
-//     Val interface{}
-//     Left *TreeNode
-//     Right *TreeNode
-// }
-
 // // 初始化节点
 // func NewTreeNode(data interface{}) *TreeNode {
 // 	return &TreeNode{

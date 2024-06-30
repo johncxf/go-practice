@@ -4,13 +4,22 @@ import "fmt"
 
 // ListNode 单链表
 type ListNode struct {
-	Val  int
-	Next *ListNode
+	Val  int       // 节点值
+	Next *ListNode // 指向下一个节点的指针
+}
+
+// NewListNode 创建一个新的链表
+func NewListNode(val int) *ListNode {
+	return &ListNode{
+		Val:  val,
+		Next: nil,
+	}
 }
 
 // AddNode 添加节点
 func AddNode(head *ListNode, v int) *ListNode {
-	newNode := &ListNode{Val: v, Next: nil}
+	//newNode := &ListNode{Val: v, Next: nil}
+	newNode := NewListNode(v)
 
 	if head == nil {
 		return newNode
