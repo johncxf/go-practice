@@ -4,6 +4,8 @@ package main
 import "fmt"
 
 // 冒泡排序
+// 时间复杂度：O(n^2)
+// 空间复杂度：O(1)
 func bubbleSort(arr []int) []int {
 	count := len(arr)
 	if 1 >= count {
@@ -25,6 +27,8 @@ func bubbleSort(arr []int) []int {
 }
 
 // 快速排序
+// 时间复杂度：O(nlog2n)，最差：O(n^2)
+// 空间复杂度：O(n)，最差：O(log2n)
 func quickSort(arr []int, left int, right int) {
 	if left > right {
 		return
@@ -53,6 +57,8 @@ func quickSort(arr []int, left int, right int) {
 }
 
 // 选择排序
+// 时间复杂度：O(n^2)
+// 空间复杂度：O(1)
 func selectSort(arr []int) []int {
 	length := len(arr)
 	for i := 0; i < length-1; i++ {
@@ -94,6 +100,8 @@ func merge(left []int, right []int) []int {
 }
 
 // 归并排序
+// 时间复杂度：O(nlog2n)
+// 空间复杂度：O(n)
 func mergeSort(arr []int) []int {
 	length := len(arr)
 	if length < 2 {
@@ -110,11 +118,45 @@ func mergeSort(arr []int) []int {
 	return merge(left, right)
 }
 
+// 堆化
+func maxHeapify(arr []int, i, heapSize int) {
+	l := 2*i + 1
+	r := 2*i + 2
+	largest := i
+
+	if l < heapSize && arr[l] > arr[largest] {
+		largest = l
+	}
+	if r < heapSize && arr[r] > arr[largest] {
+		largest = r
+	}
+	if largest != i {
+		arr[i], arr[largest] = arr[largest], arr[i]
+		maxHeapify(arr, largest, heapSize)
+	}
+}
+
+// 堆排序
+// 时间复杂度：O(nlogn)
+// 空间复杂度：O(1)
+func heapSort(arr []int) {
+	// 构建大顶堆
+	for i := len(arr)/2 - 1; i >= 0; i-- {
+		maxHeapify(arr, i, len(arr))
+	}
+	// 不断进行 将堆顶与堆低元素对换，然后重新堆化 操作
+	for i := len(arr) - 1; i > 0; i-- {
+		arr[0], arr[i] = arr[i], arr[0]
+		maxHeapify(arr, 0, i)
+	}
+}
+
 func main() {
 	arr := []int{4, 5, 6, 7, 8, 3, 2, 1}
-	arr = mergeSort(arr)
+	//arr = mergeSort(arr)
 	// arr := []int{6, 1, 2, 7, 9, 3, 4, 5, 10, 8}
 	// quickSort(arr, 0, len(arr)-1)
 	// arr = selectSort(arr)
+	heapSort(arr)
 	fmt.Println(arr)
 }
