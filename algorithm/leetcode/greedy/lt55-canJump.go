@@ -1,8 +1,8 @@
+// [L55-中等] 跳跃游戏
 package main
 
 import "fmt"
 
-// [L55-中等] 跳跃游戏
 func canJump(nums []int) bool {
 	k, n := 0, len(nums)
 	for i := 0; i < n; i++ {
