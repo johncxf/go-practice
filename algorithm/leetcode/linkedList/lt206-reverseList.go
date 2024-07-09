@@ -1,9 +1,11 @@
+// [L206-简单] 反转链表
 package main
 
 import (
 	. "go_practice/pkg/datastruct"
 )
 
+// 迭代
 func reverseList(head *ListNode) *ListNode {
 	var prev *ListNode
 	curr := head
@@ -24,6 +26,7 @@ func main() {
 	head1 = AddNode(head1, 4)
 	head1 = AddNode(head1, 5)
 
+	TraverseSingleList(head1)
 	rHead := reverseList(head1)
 	TraverseSingleList(rHead)
 }
