@@ -1,3 +1,4 @@
+// [L49-中等] 字母异位词分组
 package main
 
 import (
@@ -5,7 +6,7 @@ import (
 	"sort"
 )
 
-// [L49-中等] 字母异位词分组
+// 哈希表
 func groupAnagrams(strs []string) [][]string {
 	hash := map[string][]string{}
 	for _, str := range strs {

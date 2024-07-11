@@ -1,8 +1,9 @@
+// [L128-中等] 最长连续序列
 package main
 
 import "fmt"
 
-// [L128-中等] 最长连续序列
+// hash表
 func longestConsecutive(nums []int) int {
 	// 构建 hash 表
 	hash := map[int]bool{}

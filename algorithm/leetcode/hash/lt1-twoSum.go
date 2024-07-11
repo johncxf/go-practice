@@ -1,8 +1,9 @@
+// [L1-简单] 两数之和
 package main
 
 import "fmt"
 
-// [L1-简单] 两数之和
+// 哈希表
 func twoSum(nums []int, target int) []int {
 	hash := map[int]int{}
 	for k, v := range nums {
