@@ -1,10 +1,11 @@
+// [L11-中等] 盛最多水的容器
 package main
 
 import (
 	"fmt"
 )
 
-// [L11-中等] 盛最多水的容器
+// 双指针
 func maxArea(height []int) int {
 	n := len(height)
 	left, right, max := 0, n-1, 0

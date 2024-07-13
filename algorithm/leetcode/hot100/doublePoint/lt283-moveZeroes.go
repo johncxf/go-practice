@@ -1,8 +1,9 @@
+// [L283-简单] 移动零
 package main
 
 import "fmt"
 
-// [L283-简单] 移动零
+// 双指针
 func moveZeros(nums []int) {
 	left, right, n := 0, 0, len(nums)
 	for right < n {

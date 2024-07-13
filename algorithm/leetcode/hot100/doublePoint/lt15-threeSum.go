@@ -1,3 +1,4 @@
+// [L15-中等] 三数之和
 package main
 
 import (
@@ -5,7 +6,7 @@ import (
 	"sort"
 )
 
-// [L15-中等] 三数之和
+// 排序+双指针
 func threeSum(nums []int) [][]int {
 	n := len(nums)
 	if n < 3 {

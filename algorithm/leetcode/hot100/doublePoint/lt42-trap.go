@@ -1,3 +1,4 @@
+// [L42-困难] 接雨水
 package main
 
 import "fmt"
