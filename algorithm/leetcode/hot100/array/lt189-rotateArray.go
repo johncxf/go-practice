@@ -1,6 +1,7 @@
+// [L189-中等] 轮转数组
 package main
 
-// [L189-中等] 轮转数组
+// 切法数组
 func rotateArray(nums []int, k int) {
 	n := len(nums)
 	// 处理 k > n 的情况

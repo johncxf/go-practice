@@ -22,6 +22,7 @@ func buildTree(preorder []int, inorder []int) *TreeNode {
 	}
 	// 左子树的长度
 	l := len(inorder[:i])
+	// 递归遍历
 	root.Left = buildTree(preorder[1:l+1], inorder[:i])
 	root.Right = buildTree(preorder[l+1:], inorder[i+1:])
 	return root

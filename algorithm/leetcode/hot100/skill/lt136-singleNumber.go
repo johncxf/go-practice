@@ -3,6 +3,7 @@ package main
 
 import "fmt"
 
+// 位运算：异或
 func singleNumber(nums []int) int {
 	single := 0
 	for _, num := range nums {

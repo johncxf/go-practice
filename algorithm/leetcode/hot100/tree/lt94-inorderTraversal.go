@@ -1,3 +1,4 @@
+// [L94-简单] 二叉树的中序遍历
 package main
 
 import (
@@ -5,7 +6,6 @@ import (
 	. "go_practice/pkg/datastruct"
 )
 
-// [L94-简单] 二叉树的中序遍历
 func inorderTraversal(root *TreeNode) (res []int) {
 	var inorder func(node *TreeNode)
 	inorder = func(node *TreeNode) {

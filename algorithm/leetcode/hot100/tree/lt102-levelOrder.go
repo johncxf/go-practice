@@ -1,3 +1,4 @@
+// [L102-简单] 二叉树的层次遍历
 package main
 
 import (
@@ -5,7 +6,6 @@ import (
 	. "go_practice/pkg/datastruct"
 )
 
-// [L102-简单] 二叉树的层次遍历
 func levelOrder(root *TreeNode) [][]int {
 	ret := make([][]int, 0)
 	if root == nil {

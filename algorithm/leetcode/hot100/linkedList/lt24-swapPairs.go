@@ -1,3 +1,4 @@
+// [L24-中等] 两两交换链表中的节点
 package main
 
 import (
@@ -17,19 +18,23 @@ func swapPairs(head *ListNode) *ListNode {
 
 // 迭代
 func swapPairs2(head *ListNode) *ListNode {
-	dummyHead := &ListNode{0, head}
-	temp := dummyHead
-	for temp.Next != nil && temp.Next.Next != nil {
-		node1 := temp.Next
-		node2 := temp.Next.Next
+	if head == nil || head.Next == nil {
+		return head
+	}
+	// 哑节点：0-1-2-3-4
+	dummy := &ListNode{0, head}
+	cur := dummy
+	for cur.Next != nil && cur.Next.Next != nil {
+		node1 := cur.Next
+		node2 := cur.Next.Next
 
-		temp.Next = node2
+		cur.Next = node2
 		node1.Next = node2.Next
 		node2.Next = node1
 
-		temp = node1
+		cur = node1
 	}
-	return dummyHead.Next
+	return dummy.Next
 }
 
 func main() {

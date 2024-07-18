@@ -6,9 +6,26 @@ import (
 	. "go_practice/pkg/datastruct"
 )
 
-func kthSmallest(root *TreeNode, k int) int {
+// 中序遍历
+func kthSmallest1(root *TreeNode, k int) int {
+	var list []int
 	var inorder func(node *TreeNode)
+	inorder = func(node *TreeNode) {
+		if node == nil {
+			return
+		}
+		inorder(node.Left)
+		list = append(list, node.Val)
+		inorder(node.Right)
+	}
+	inorder(root)
+	return list[k-1]
+}
+
+// 中序遍历
+func kthSmallest2(root *TreeNode, k int) int {
 	ans := 0
+	var inorder func(node *TreeNode)
 	inorder = func(node *TreeNode) {
 		if ans != 0 {
 			return
@@ -38,5 +55,6 @@ func main() {
 	node3.Right = node4
 	node1.Left = node2
 
-	fmt.Println(kthSmallest(node3, 1))
+	fmt.Println(kthSmallest1(node3, 1))
+	fmt.Println(kthSmallest2(node3, 1))
 }

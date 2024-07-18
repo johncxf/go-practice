@@ -2,47 +2,51 @@
 package main
 
 import (
+	"fmt"
 	. "go_practice/pkg/datastruct"
 )
 
 func reverseKGroup(head *ListNode, k int) *ListNode {
-	res := &ListNode{Next: head}
-	pre := res
-	for head != nil {
+	// 哑节点
+	dummy := &ListNode{0, head}
+	// 初始化 pre 指针
+	pre := dummy
+	for pre != nil {
+		// 尾部指针
 		tail := pre
-		// 移动 k 步
+		// 尾部指针 tail 每次移动 k 步
 		for i := 0; i < k; i++ {
 			tail = tail.Next
-			// 这一轮剩余步数小于k，直接返回
+			// 剩余可移动步数小于k，则直接返回
 			if tail == nil {
-				return res.Next
+				return dummy.Next
 			}
 		}
-		// 暂存节点
-		temp := tail.Next
-		// 反转
-		head, tail = reverse(head, tail)
-		// 重新连接首位节点
-		pre.Next = head
-		tail.Next = temp
-		// 下一轮
-		pre = tail
-		head = tail.Next
+		// 暂存尾部指针后面的节点，然后将指针断开
+		nex := tail.Next
+		tail.Next = nil
+		// 定义 start 指针，作为待反转链表的头部
+		start := pre.Next
+		// 进行反转链表，反转后重新连接到 pre 上
+		pre.Next = reverse(start)
+		// 将前面断开的部分重新连接上（此时的 start 是该段链表的尾部）
+		start.Next = nex
+		// pre 指针移动到当前已反转完成的尾部
+		pre = start
 	}
-	return res.Next
+	return dummy.Next
 }
 
 // 反转链表
-func reverse(head, tail *ListNode) (*ListNode, *ListNode) {
-	prev := tail.Next
-	p := head
-	for prev != tail {
-		temp := p.Next
-		p.Next = prev
-		prev = p
-		p = temp
+func reverse(head *ListNode) *ListNode {
+	var pre *ListNode
+	for head != nil {
+		temp := head.Next
+		head.Next = pre
+		pre = head
+		head = temp
 	}
-	return tail, head
+	return pre
 }
 
 func main() {
@@ -53,5 +57,7 @@ func main() {
 	head1 = AddNode(head1, 4)
 	head1 = AddNode(head1, 5)
 
+	TraverseSingleList(head1)
+	fmt.Println("反转后：")
 	TraverseSingleList(reverseKGroup(head1, 2))
 }

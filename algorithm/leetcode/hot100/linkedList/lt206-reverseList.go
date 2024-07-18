@@ -5,17 +5,36 @@ import (
 	. "go_practice/pkg/datastruct"
 )
 
-// 迭代
-func reverseList(head *ListNode) *ListNode {
-	var prev *ListNode
-	curr := head
-	for curr != nil {
-		next := curr.Next
-		curr.Next = prev
-		prev = curr
-		curr = next
+// 先遍历链表，存储在数组中，再重新构建链表
+func reverseList1(head *ListNode) *ListNode {
+	var tmp []int
+	for head != nil {
+		tmp = append(tmp, head.Val)
+		head = head.Next
 	}
-	return prev
+	ansHead := &ListNode{Val: 0}
+	tmpHead := ansHead
+	for i := len(tmp) - 1; i >= 0; i-- {
+		tmpHead.Next = &ListNode{Val: tmp[i]}
+		tmpHead = tmpHead.Next
+	}
+	return ansHead.Next
+}
+
+// 迭代
+func reverseList2(head *ListNode) *ListNode {
+	var pre *ListNode
+	// 遍历链表
+	for head != nil {
+		// 暂存 next 指针
+		temp := head.Next
+		// 将 Next 指向前一个节点（断开head）
+		head.Next = pre
+		pre = head
+		// 移动
+		head = temp
+	}
+	return pre
 }
 
 func main() {
@@ -27,6 +46,7 @@ func main() {
 	head1 = AddNode(head1, 5)
 
 	TraverseSingleList(head1)
-	rHead := reverseList(head1)
+	//rHead := reverseList1(head1)
+	rHead := reverseList1(head1)
 	TraverseSingleList(rHead)
 }

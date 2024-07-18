@@ -5,6 +5,7 @@ import (
 	. "go_practice/pkg/datastruct"
 )
 
+// 前序遍历
 func flatten(root *TreeNode) {
 	// 前序遍历二叉树，存储节点
 	list := make([]*TreeNode, 0)

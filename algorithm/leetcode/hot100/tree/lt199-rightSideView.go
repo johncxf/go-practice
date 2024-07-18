@@ -5,6 +5,7 @@ import (
 	. "go_practice/pkg/datastruct"
 )
 
+// 层次遍历，每次取最后一个元素
 func rightSideView(root *TreeNode) []int {
 	ans := make([]int, 0)
 	if root == nil {

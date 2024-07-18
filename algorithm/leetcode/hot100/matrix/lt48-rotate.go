@@ -1,6 +1,7 @@
 // [L48-中等] 旋转图像
 package main
 
+// 借助新数组
 func rotate(matrix [][]int) {
 	n := len(matrix)
 	newMatrix := make([][]int, n)

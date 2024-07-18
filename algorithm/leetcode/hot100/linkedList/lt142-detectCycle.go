@@ -7,14 +7,12 @@ import (
 )
 
 func detectCycle(head *ListNode) *ListNode {
-	hash := map[*ListNode]struct{}{}
-	i := 0
+	hash := map[*ListNode]bool{}
 	for head != nil {
 		if _, ok := hash[head]; ok {
 			return head
 		}
-		i++
-		hash[head] = struct{}{}
+		hash[head] = true
 		head = head.Next
 	}
 	return nil

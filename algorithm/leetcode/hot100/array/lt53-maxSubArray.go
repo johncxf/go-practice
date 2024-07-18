@@ -1,8 +1,9 @@
+// [L53-中等] 最大子数组和
 package main
 
 import "fmt"
 
-// [L53-中等] 最大子数组和
+// 动态规划
 func maxSubArray(nums []int) int {
 	n := len(nums)
 	dp := make([]int, n)

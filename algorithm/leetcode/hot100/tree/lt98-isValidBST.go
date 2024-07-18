@@ -10,7 +10,7 @@ import (
 func isValidBST(root *TreeNode) bool {
 	var inorder func(node *TreeNode)
 	// 根据题意，节点最小值为-2的32次方
-	tmp := -int64(math.Pow(-2, 32))
+	tmp := math.MinInt64
 	res := true
 	inorder = func(node *TreeNode) {
 		// 已知结果，直接返回
@@ -22,11 +22,11 @@ func isValidBST(root *TreeNode) bool {
 		}
 		inorder(node.Left)
 		// 当前节点值必需大于前一个节点值，否则为非二叉搜索树
-		if int64(node.Val) <= tmp {
+		if node.Val <= tmp {
 			res = false
 			return
 		}
-		tmp = int64(node.Val)
+		tmp = node.Val
 		inorder(node.Right)
 	}
 	inorder(root)

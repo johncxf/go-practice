@@ -1,3 +1,4 @@
+// [L234-简单] 回文链表
 package main
 
 import (
@@ -5,6 +6,7 @@ import (
 	. "go_practice/pkg/datastruct"
 )
 
+// 先遍历链表存入数组，再遍历数组进行判断
 func isPalindrome(head *ListNode) bool {
 	if head == nil {
 		return false

@@ -6,17 +6,18 @@ import (
 	. "go_practice/pkg/datastruct"
 )
 
+// hashMap，遍历链表，将节点存入 hashMap，如果已存在相同节点，则说明存在环
 func hasCycle(head *ListNode) bool {
 	if head == nil {
 		return false
 	}
 
-	hash := map[*ListNode]struct{}{}
+	hash := map[*ListNode]bool{}
 	for head != nil {
 		if _, ok := hash[head]; ok {
 			return true
 		}
-		hash[head] = struct{}{}
+		hash[head] = true
 		head = head.Next
 	}
 	return false

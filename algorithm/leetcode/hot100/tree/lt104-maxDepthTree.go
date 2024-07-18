@@ -1,3 +1,4 @@
+// [L104-简单] 二叉树的最大深度
 package main
 
 import (
@@ -5,7 +6,7 @@ import (
 	. "go_practice/pkg/datastruct"
 )
 
-// [L101-简单] 对称二叉树
+// 递归
 func maxDepth(root *TreeNode) int {
 	if root == nil {
 		return 0

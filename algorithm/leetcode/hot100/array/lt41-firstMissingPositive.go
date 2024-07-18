@@ -1,7 +1,9 @@
 // [L41-困难] 缺失的第一个正数
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func firstMissingPositive(nums []int) int {
 	n := len(nums)

@@ -1,3 +1,4 @@
+// [L101-简单] 对称二叉树
 package main
 
 import (
@@ -5,11 +6,11 @@ import (
 	. "go_practice/pkg/datastruct"
 )
 
-// [L101-简单] 对称二叉树
 func isSymmetric(root *TreeNode) bool {
 	return check(root, root)
 }
 
+// 递归
 func check(p, q *TreeNode) bool {
 	if p == nil && q == nil {
 		return true
