@@ -1,3 +1,4 @@
+// L994-中等] 腐烂的橘子
 package main
 
 import "fmt"
@@ -24,11 +25,13 @@ func orangesRotting(grid [][]int) int {
 		round++
 		// 获取当前队列长度
 		size := len(queue)
+		// 遍历当前层，将新鲜橘子更新为腐烂橘子，并更新新一轮腐烂橘子的队列
 		for i := 0; i < size; i++ { // 使用size来避免在迭代中改变queue的长度
 			orange := queue[0]
 			queue = queue[1:]
 			r, c := orange[0], orange[1]
-			for r-1 >= 0 && grid[r-1][c] == 1 { // 上
+			// 分别在腐烂橘子的上、下、左、右进行感染
+			if r-1 >= 0 && grid[r-1][c] == 1 { // 上
 				grid[r-1][c] = 2
 				count--
 				queue = append(queue, []int{r - 1, c})

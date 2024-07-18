@@ -1,3 +1,4 @@
+// [L437-中等] 路径总和 III
 package main
 
 import (
@@ -5,27 +6,37 @@ import (
 	. "go_practice/pkg/datastruct"
 )
 
-func rootSum(root *TreeNode, targetSum int) (res int) {
-	if root == nil {
-		return
-	}
-	val := root.Val
-	if val == targetSum {
-		res++
-	}
-	res += rootSum(root.Left, targetSum-val)
-	res += rootSum(root.Right, targetSum-val)
-	return
-}
-
 func pathSum(root *TreeNode, targetSum int) int {
 	if root == nil {
 		return 0
 	}
-	res := rootSum(root, targetSum)
-	res += pathSum(root.Left, targetSum)
-	res += pathSum(root.Right, targetSum)
-	return res
+	ans := 0
+	var preorder func(node *TreeNode, res *int)
+	preorder = func(node *TreeNode, res *int) {
+		if node == nil {
+			return
+		}
+		*res += rootSum(node, targetSum)
+		preorder(node.Left, res)
+		preorder(node.Right, res)
+	}
+	// 遍历所有节点，以每个节点为根节点统计对应符合条件的数量
+	preorder(root, &ans)
+	return ans
+}
+
+// 先序遍历：以当前节点为根节点下所有节点和为 target 的数量
+func rootSum(node *TreeNode, target int) (res int) {
+	if node == nil {
+		return
+	}
+	v := node.Val
+	if v == target {
+		res++
+	}
+	res += rootSum(node.Left, target-v)
+	res += rootSum(node.Right, target-v)
+	return
 }
 
 func main() {

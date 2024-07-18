@@ -1,8 +1,24 @@
-// [L463-中等] 岛屿的周长
+// [L200-中等] 岛屿数量
 package main
 
 import "fmt"
 
+func numIslands(grid [][]byte) int {
+	ans := 0
+	// 遍历矩阵
+	for i := 0; i < len(grid); i++ {
+		for j := 0; j < len(grid[0]); j++ {
+			// 1 是岛屿，则进行扩张操作
+			if grid[i][j] == '1' {
+				ans++
+				dfsIslands(grid, i, j)
+			}
+		}
+	}
+	return ans
+}
+
+// 以某个点位为中心进行上下左右位置的标记
 func dfsIslands(grid [][]byte, r, c int) {
 	// 超出边界，返回
 	if r < 0 || len(grid) <= r || c < 0 || len(grid[0]) <= c {
@@ -19,19 +35,6 @@ func dfsIslands(grid [][]byte, r, c int) {
 	dfsIslands(grid, r+1, c)
 	dfsIslands(grid, r, c-1)
 	dfsIslands(grid, r, c+1)
-}
-
-func numIslands(grid [][]byte) int {
-	ans := 0
-	for i := 0; i < len(grid); i++ {
-		for j := 0; j < len(grid[0]); j++ {
-			if grid[i][j] == '1' {
-				ans++
-				dfsIslands(grid, i, j)
-			}
-		}
-	}
-	return ans
 }
 
 func main() {

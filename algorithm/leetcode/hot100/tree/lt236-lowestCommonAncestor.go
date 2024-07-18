@@ -1,3 +1,4 @@
+// [L236-中等] 二叉树的最近公共祖先
 package main
 
 import (
@@ -17,9 +18,6 @@ func lowestCommonAncestor(root, p, q *TreeNode) *TreeNode {
 	// 分别递归左右子树
 	left := lowestCommonAncestor(root.Left, p, q)
 	right := lowestCommonAncestor(root.Right, p, q)
-	if left == nil && right == nil {
-		return nil
-	}
 	if left == nil {
 		return right
 	}

@@ -7,10 +7,14 @@ import "fmt"
 func findOrderDfs(numCourses int, prerequisites [][]int) []int {
 	// 结果集
 	res := make([]int, 0)
-	// 遍历过的节点，存入栈
-	visited := make([]int, numCourses)
-	// 邻接表
+	// 构建邻接表（存储有向图）
+	// i 对应于一个节点（即课程），edges[i] 则是一个包含所有以课程 i 为先修课程的课程列表。
 	edges := make([][]int, numCourses)
+	for _, info := range prerequisites {
+		edges[info[1]] = append(edges[info[1]], info[0])
+	}
+	// 栈结构：标记每个节点的状态：0=未搜索，1=搜索中，2=已完成
+	visited := make([]int, numCourses)
 	// 是否存在拓扑排序（如果一个有向图包含环，则不存在）
 	valid := true
 	// 深度优先遍历
@@ -34,12 +38,8 @@ func findOrderDfs(numCourses int, prerequisites [][]int) []int {
 		// 记录结果
 		res = append(res, u)
 	}
-	// 构建邻接表
-	// i 对应于一个节点（即课程），edges[i] 则是一个包含所有以课程 i 为先修课程的课程列表。
-	for _, info := range prerequisites {
-		edges[info[1]] = append(edges[info[1]], info[0])
-	}
 	// 遍历，对未搜索的节点进行深度优先搜索
+	// 为什么遍历 numCourses？因为题目中说到 0 ～ numCourses-1 为对应要选的课程
 	for i := 0; i < numCourses && valid; i++ {
 		if visited[i] == 0 {
 			dfs(i)
@@ -58,40 +58,42 @@ func findOrderDfs(numCourses int, prerequisites [][]int) []int {
 
 // 广度优先搜索（bfs）
 func findOrderBfs(numCourses int, prerequisites [][]int) []int {
-	// 邻接表
-	edges := make([][]int, numCourses)
-	// 每门课程的入度
-	indeg := make([]int, numCourses)
 	// 结果集
 	res := make([]int, 0)
+	// 每门课程的入度（即有多少课程依赖它）
+	inDegree := make([]int, numCourses)
 	// 构建邻接表
+	edges := make([][]int, numCourses)
 	for _, info := range prerequisites {
 		// edges[i] 表示课程 i 的所有后继课程（即依赖于课程 i 的课程）。
 		edges[info[1]] = append(edges[info[1]], info[0])
 		// 获取每门课程的入度（有多少课程依赖它）
-		indeg[info[0]]++
+		inDegree[info[0]]++
 	}
-	// 找出所有入度为0的节点
-	q := []int{}
+	// 先找出所有入度为0的节点（即先找出不依赖其他课程的课程）
+	queue := make([]int, 0)
 	for i := 0; i < numCourses; i++ {
-		if indeg[i] == 0 {
-			q = append(q, i)
+		if inDegree[i] == 0 {
+			queue = append(queue, i)
 		}
 	}
 	// 遍历入度为0的节点
-	for len(q) > 0 {
-		u := q[0]
-		q = q[1:]
+	for len(queue) > 0 {
+		// 出队
+		u := queue[0]
+		queue = queue[1:]
 		// 入度为0，则说明已不依赖其他节点，加入结果
 		res = append(res, u)
-		// 删除节点（删除节点所有度）
+		// 删除依赖当前课程的度（边）
 		for _, v := range edges[u] {
-			indeg[v]--
-			if indeg[v] == 0 {
-				q = append(q, v)
+			inDegree[v]--
+			// 度为0的时候则可以加入 queue 队列中
+			if inDegree[v] == 0 {
+				queue = append(queue, v)
 			}
 		}
 	}
+	// 解雇长度不等于课程数，说明有无法删除的节点，则说明存在环
 	if len(res) != numCourses {
 		return []int{}
 	}
@@ -106,5 +108,4 @@ func main() {
 	fmt.Println("广度优先搜索（bfs）:")
 	fmt.Println(findOrderBfs(2, [][]int{{1, 0}}))
 	fmt.Println(findOrderBfs(4, [][]int{{1, 0}, {2, 0}, {3, 1}, {3, 2}}))
-
 }
