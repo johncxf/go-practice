@@ -1,3 +1,4 @@
+// [L39-中等] 组合总和
 package main
 
 import (
@@ -29,7 +30,6 @@ func backtraceCombinationSum(start, target int, state, choices []int, res *[][]i
 	}
 }
 
-// [L39-中等] 组合总和
 func combinationSum(candidates []int, target int) [][]int {
 	// 先进行排序，为去重
 	sort.Ints(candidates)

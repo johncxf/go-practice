@@ -1,3 +1,4 @@
+// [L78-中等] 子集
 package main
 
 import "fmt"
@@ -17,7 +18,6 @@ func backtrackSubsets(nums []int, path []int, start int, res *[][]int) {
 	}
 }
 
-// [L78-中等] 子集
 func subsets(nums []int) [][]int {
 	res := make([][]int, 0)
 	path := make([]int, 0)

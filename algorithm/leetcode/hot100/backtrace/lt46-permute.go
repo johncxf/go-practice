@@ -1,3 +1,4 @@
+// [L46-简单] 全排列
 package main
 
 import "fmt"
@@ -11,6 +12,7 @@ func backtracePermute(nums []int, state []int, selected []bool, res [][]int) [][
 	}
 	// 遍历所有选择
 	for i := 0; i < len(nums); i++ {
+		// 剪枝
 		if selected[i] {
 			continue
 		}
@@ -26,7 +28,6 @@ func backtracePermute(nums []int, state []int, selected []bool, res [][]int) [][
 	return res
 }
 
-// [L46-简单] 全排列
 func permute(nums []int) [][]int {
 	res := make([][]int, 0)
 	state := make([]int, 0)

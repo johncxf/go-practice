@@ -1,10 +1,11 @@
+// [L17-中等] 电话号码的字母组合
 package main
 
 import (
 	"fmt"
 )
 
-var phoneMap map[string]string = map[string]string{
+var phoneMap = map[string]string{
 	"2": "abc",
 	"3": "def",
 	"4": "ghi",
@@ -15,6 +16,7 @@ var phoneMap map[string]string = map[string]string{
 	"9": "wxyz",
 }
 
+// 回溯
 func backtrackLetter(digits string, index int, combination string, res *[]string) {
 	if index == len(digits) {
 		*res = append(*res, combination)
@@ -27,7 +29,6 @@ func backtrackLetter(digits string, index int, combination string, res *[]string
 	}
 }
 
-// [L17-中等] 电话号码的字母组合
 func letterCombinations(digits string) []string {
 	if len(digits) == 0 {
 		return []string{}
