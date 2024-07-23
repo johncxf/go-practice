@@ -1,8 +1,9 @@
+// [L35-简单] 搜索插入位置
 package main
 
 import "fmt"
 
-// [L35-简单] 搜索插入位置
+// 二分查找
 func searchInsert(nums []int, target int) int {
 	n := len(nums)
 	left, right := 0, n-1

@@ -1,8 +1,9 @@
+// [L33-中等] 搜索旋转排序数组
 package main
 
 import "fmt"
 
-// [L33-中等] 搜索旋转排序数组
+// 二分查找
 func searchOrderArray(nums []int, target int) int {
 	left, right := 0, len(nums)-1
 	for left <= right {

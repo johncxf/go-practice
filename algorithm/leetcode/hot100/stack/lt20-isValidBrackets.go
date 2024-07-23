@@ -1,10 +1,10 @@
+// [L20-简单] 有效的括号
 package main
 
 import (
 	"fmt"
 )
 
-// [L20-简单] 有效的括号
 func isValid(s string) bool {
 	bracketsMap := map[byte]byte{
 		'(': ')',

@@ -3,21 +3,21 @@ package main
 
 import (
 	"fmt"
-	"math"
 )
 
+// 动态规划
 func numSquares(n int) int {
-	f := make([]int, n+1)
+	dp := make([]int, n+1)
 	for i := 1; i <= n; i++ {
-		min := math.MaxInt32
+		// 设置一个较大数
+		dp[i] = i
 		for j := 1; j*j <= i; j++ {
-			if f[i-j*j] < min {
-				min = f[i-j*j]
+			if dp[i-j*j]+1 < dp[i] {
+				dp[i] = dp[i-j*j] + 1
 			}
 		}
-		f[i] = min + 1
 	}
-	return f[n]
+	return dp[n]
 }
 
 func main() {

@@ -1,3 +1,4 @@
+// [L416-中等] 分割等和子集
 package main
 
 import "fmt"

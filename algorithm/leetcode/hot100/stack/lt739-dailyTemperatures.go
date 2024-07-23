@@ -3,9 +3,11 @@ package main
 
 import "fmt"
 
+// 单调栈
 func dailyTemperatures(temperatures []int) []int {
 	n := len(temperatures)
 	ans := make([]int, n)
+	// 单调栈：栈元素递减
 	stack := make([]int, 0)
 	for i := 0; i < n; i++ {
 		// 当前温度

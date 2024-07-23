@@ -4,44 +4,45 @@ package main
 import "fmt"
 
 func searchWord(board [][]byte, word string) bool {
-	m, n := len(board), len(board[0])
-	words := []byte(word)
-	for i := 0; i < m; i++ {
-		for j := 0; j < n; j++ {
-			if backtrackSW(board, words, i, j, 0) {
-				return true
+	for i, row := range board {
+		for j, col := range row {
+			if col == word[0] {
+				if backtrackSW(board, word, i, j, 0) {
+					return true
+				}
 			}
 		}
 	}
 	return false
 }
 
-func backtrackSW(board [][]byte, words []byte, i, j, k int) bool {
+// 回溯
+func backtrackSW(board [][]byte, word string, i, j, k int) bool {
 	// 越界
 	if i < 0 || i >= len(board) || j < 0 || j >= len(board[0]) {
 		return false
 	}
-	// 已访问过
+	// 已访问过退出
 	if board[i][j] == '0' {
 		return false
 	}
 	// 当前字符串不匹配
-	if board[i][j] != words[k] {
+	if board[i][j] != word[k] {
 		return false
 	}
 	// 全部匹配通过
-	if k == len(words)-1 {
+	if k == len(word)-1 {
 		return true
 	}
 	// 标记访问过的路径
 	board[i][j] = '0'
 	// DFS遍历所有路径
-	res := backtrackSW(board, words, i-1, j, k+1) ||
-		backtrackSW(board, words, i+1, j, k+1) ||
-		backtrackSW(board, words, i, j-1, k+1) ||
-		backtrackSW(board, words, i, j+1, k+1)
+	res := backtrackSW(board, word, i-1, j, k+1) ||
+		backtrackSW(board, word, i+1, j, k+1) ||
+		backtrackSW(board, word, i, j-1, k+1) ||
+		backtrackSW(board, word, i, j+1, k+1)
 	// 回退
-	board[i][j] = words[k]
+	board[i][j] = word[k]
 	return res
 }
 

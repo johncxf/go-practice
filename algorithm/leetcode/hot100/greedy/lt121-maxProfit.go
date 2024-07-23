@@ -1,8 +1,9 @@
+// [L121-简单] 买卖股票的最佳时机
 package main
 
 import "fmt"
 
-// [L121-简单] 买卖股票的最佳时机
+// 贪心策略
 func maxProfit(prices []int) int {
 	maxPro, minPro := 0, int(1e5)
 	for i := 0; i < len(prices); i++ {

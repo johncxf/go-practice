@@ -10,6 +10,7 @@ func partition(s string) [][]string {
 	return ans
 }
 
+// 回溯
 func backtrackPa(s string, path []string, start int, ans *[][]string) {
 	// 所有元素都遍历完成，将path添加到结果中
 	if start == len(s) {

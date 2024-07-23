@@ -3,6 +3,7 @@ package main
 
 import "fmt"
 
+// 二分查找
 func searchMatrix(matrix [][]int, target int) bool {
 	m, n := len(matrix), len(matrix[0])
 	// 对第一列进行二分查找，找出最后一个小于目标值的元素

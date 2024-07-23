@@ -3,6 +3,7 @@ package main
 
 import "fmt"
 
+// 贪心
 func jump(nums []int) int {
 	// 当前可跳最大距离、步数、当前下标可跳最远距离结束下标
 	max, steps, end := 0, 0, 0
@@ -10,6 +11,7 @@ func jump(nums []int) int {
 		if i+nums[i] > max {
 			max = i + nums[i]
 		}
+		// 已到结束位置，则更新下一个跳跃
 		if i == end {
 			end = max
 			steps++

@@ -3,6 +3,7 @@ package main
 
 import "fmt"
 
+// 二分查找
 func findMin(nums []int) int {
 	l, r := 0, len(nums)-1
 	min := nums[0]

@@ -3,6 +3,7 @@ package main
 
 import "fmt"
 
+// 动态规划：dp[i]=max(dp[i-1],dp[i-2]+nums[i])，i >= 2
 func rob(nums []int) int {
 	n := len(nums)
 	if n == 1 {

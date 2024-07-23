@@ -1,8 +1,8 @@
+// [L118-简单] 杨辉三角
 package main
 
 import "fmt"
 
-// [L118-简单] 杨辉三角
 func generate(numRows int) [][]int {
 	ans := make([][]int, numRows)
 	for i := 0; i < numRows; i++ {
