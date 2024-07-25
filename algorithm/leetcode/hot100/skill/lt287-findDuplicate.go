@@ -21,6 +21,20 @@ func findDuplicate(nums []int) int {
 	return cur
 }
 
+func findDuplicate2(nums []int) int {
+	tmp := make([]int, len(nums))
+	for _, num := range nums {
+		if tmp[num] > 0 {
+			return num
+		}
+		tmp[num]++
+	}
+	return -1
+}
+
 func main() {
 	fmt.Println(findDuplicate([]int{1, 3, 4, 2, 2}))
+
+	fmt.Println(findDuplicate2([]int{1, 3, 4, 2, 2}))
+
 }

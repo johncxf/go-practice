@@ -55,6 +55,33 @@ func topKFrequent(nums []int, k int) []int {
 	return ret
 }
 
+// 桶排序
+func topKFrequent2(nums []int, k int) []int {
+	// 先遍历数组统计每个元素出现的次数
+	hash := map[int]int{}
+	for _, num := range nums {
+		hash[num]++
+	}
+	// 桶排序
+	// 构建 n+1 个桶
+	buckets := make([][]int, len(nums)+1)
+	// 以元素出现的次数为下标分配到桶里
+	for i, v := range hash {
+		buckets[v] = append(buckets[v], i)
+	}
+	// 倒序遍历所有桶，取出 k 个元素
+	var ans []int
+	for i := len(buckets) - 1; i > 0 && k > 0; i-- {
+		if len(buckets[i]) > 0 {
+			k = k - len(buckets[i])
+			ans = append(ans, buckets[i]...)
+		}
+	}
+	return ans
+}
+
 func main() {
 	fmt.Println(topKFrequent([]int{1, 1, 1, 2, 2, 3}, 2))
+
+	fmt.Println(topKFrequent2([]int{1, 1, 1, 2, 2, 3}, 2))
 }

@@ -3,15 +3,24 @@ package main
 
 import "fmt"
 
-func uniquePaths(m, n int) int {
+// 动态规划
+func uniquePaths(m int, n int) int {
+	// 构建dp表
+	// dp[i][j] 到达 i,j 位置的路径数
 	dp := make([][]int, m)
+	// 边界处理
+	// dp[0][0] = 1
+	// dp[i][0] = 1
 	for i := range dp {
 		dp[i] = make([]int, n)
 		dp[i][0] = 1
 	}
-	for j := 0; j < n; j++ {
+	// dp[0][j] = 1
+	for j := 1; j < n; j++ {
 		dp[0][j] = 1
 	}
+	// 状态转移
+	// dp[i][j] = dp[i-1][j] + dp[i][j-1]
 	for i := 1; i < m; i++ {
 		for j := 1; j < n; j++ {
 			dp[i][j] = dp[i-1][j] + dp[i][j-1]
