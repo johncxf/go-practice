@@ -3,36 +3,17 @@ package main
 
 import "fmt"
 
-// 超时 - 不适用
-func maxSlidingWindow99(nums []int, k int) []int {
-	maxIndex, max := 0, nums[0]
-	ans, kArr := make([]int, 0), make([]int, 0)
-	for i := 0; i < k; i++ {
-		kArr = append(kArr, nums[i])
-		if nums[i] > max {
-			max = nums[i]
-			maxIndex = i
-		}
-	}
-	ans = append(ans, max)
-	for i := k; i < len(nums); i++ {
-		kArr = append(kArr, nums[i])
-		kArr = kArr[1:]
-		if nums[i] > max {
-			max = nums[i]
-			maxIndex = len(kArr) - 1
-		} else {
-			if maxIndex > 0 {
-				maxIndex--
-			} else {
-				max = kArr[0]
-				maxIndex = 0
-				for j, v := range kArr {
-					if v > max {
-						maxIndex = j
-						max = v
-					}
-				}
+// 暴力，超时
+func maxSlidingWindow1(nums []int, k int) []int {
+	n := len(nums)
+	var ans []int
+	// 以i为窗口起始点进行遍历
+	for i := 0; i <= n-k; i++ {
+		max := nums[i]
+		// 查找 i+k 个元素中的最大值
+		for j := i + 1; j < i+k; j++ {
+			if nums[j] > max {
+				max = nums[j]
 			}
 		}
 		ans = append(ans, max)
@@ -40,10 +21,12 @@ func maxSlidingWindow99(nums []int, k int) []int {
 	return ans
 }
 
-func maxSlidingWindow(nums []int, k int) []int {
+func maxSlidingWindow2(nums []int, k int) []int {
+	// 单调队列，单调递减
 	q := make([]int, 0)
+	// 实现单调队列入队操作
 	push := func(i int) {
-		// 删除队列中所有大于 num[i] 的元素
+		// 删除所有小于 num 的元素，并将 num 添加至队尾，保持单调递减
 		for len(q) > 0 && nums[i] >= nums[q[len(q)-1]] {
 			q = q[:len(q)-1]
 		}
@@ -53,22 +36,26 @@ func maxSlidingWindow(nums []int, k int) []int {
 	for i := 0; i < k; i++ {
 		push(i)
 	}
-
+	// 结果集合
 	ans := make([]int, 0)
 	ans = append(ans, nums[q[0]])
+	// 移动窗口右坐标 i
 	for i := k; i < len(nums); i++ {
-		// 入队
+		// 当前元素入队
 		push(i)
-		// 保证队列长度小于 k
+		// 如果当前队头元素不在长度为 k 的区间，则删除该队头元素
 		for q[0] <= i-k {
 			q = q[1:]
 		}
+		// 将队头加入结果集合
 		ans = append(ans, nums[q[0]])
 	}
 	return ans
 }
 
 func main() {
-	fmt.Println(maxSlidingWindow([]int{1, 3, -1, -3, 5, 3, 6, 7}, 3))
-	//fmt.Println(maxSlidingWindow([]int{1, -1}, 1))
+	fmt.Println(maxSlidingWindow1([]int{1, 3, -1, -3, 5, 3, 6, 7}, 3))
+
+	fmt.Println(maxSlidingWindow2([]int{1, 3, -1, -3, 5, 3, 6, 7}, 3))
+	fmt.Println(maxSlidingWindow2([]int{1, -1}, 1))
 }

@@ -6,6 +6,7 @@ import (
 	"math"
 )
 
+// 滑动窗口
 func minWindow(s string, t string) string {
 	n := len(s)
 	// hashMap 维护 t 字符以及字符个数
@@ -56,4 +57,9 @@ func minWindow(s string, t string) string {
 
 func main() {
 	fmt.Println(minWindow("ADOBECODEBANC", "ABC"))
+
+	hash := map[int]int{
+		1: 1,
+	}
+	fmt.Println(hash[2])
 }
