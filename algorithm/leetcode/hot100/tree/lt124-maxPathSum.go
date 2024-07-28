@@ -1,3 +1,4 @@
+// [L124-困难] 二叉树中的最大路径和
 package main
 
 import (
@@ -6,6 +7,7 @@ import (
 	"math"
 )
 
+// 递归
 func maxPathSum(root *TreeNode) int {
 	maxSum := math.MinInt32
 	var maxGain func(*TreeNode) int
