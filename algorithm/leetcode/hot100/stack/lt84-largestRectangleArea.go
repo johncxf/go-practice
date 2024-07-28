@@ -107,7 +107,10 @@ func largestRectangleArea3(heights []int) int {
 	return maxArea
 }
 
-func largestRectangleArea(heights []int) int {
+// 优化2
+// 时间复杂度：O(N)
+// 空间复杂度：O(N)
+func largestRectangleArea4(heights []int) int {
 	n := len(heights)
 	left, right := make([]int, n), make([]int, n)
 	for i := 0; i < n; i++ {
@@ -148,5 +151,5 @@ func main() {
 	fmt.Println(largestRectangleArea2([]int{2, 1, 5, 6, 2, 3}))
 	fmt.Println(largestRectangleArea3([]int{2, 1, 5, 6, 2, 3}))
 
-	fmt.Println(largestRectangleArea([]int{2, 1, 5, 6, 2, 3}))
+	fmt.Println(largestRectangleArea4([]int{2, 1, 5, 6, 2, 3}))
 }
