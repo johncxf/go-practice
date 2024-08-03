@@ -19,5 +19,5 @@ func main() {
 		go add1(1, i)
 	}
 	// 让主协程等待 1s 后退出
-	time.Sleep(1e9)
+	time.Sleep(1 * time.Second)
 }

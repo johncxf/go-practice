@@ -21,8 +21,23 @@ func reverseList1(head *ListNode) *ListNode {
 	return ansHead.Next
 }
 
-// 迭代
+// 先遍历链表，存储在数组中，再重新构建链表
 func reverseList2(head *ListNode) *ListNode {
+	nodes := []*ListNode{}
+	for node := head; node != nil; node = node.Next {
+		nodes = append(nodes, node)
+	}
+	dummy := &ListNode{Val: 0}
+	cur := dummy
+	for i := len(nodes) - 1; i >= 0; i-- {
+		cur.Next = &ListNode{Val: nodes[i].Val}
+		cur = cur.Next
+	}
+	return dummy.Next
+}
+
+// 迭代
+func reverseList3(head *ListNode) *ListNode {
 	var pre *ListNode
 	// 遍历链表
 	for head != nil {
@@ -47,6 +62,7 @@ func main() {
 
 	TraverseSingleList(head1)
 	//rHead := reverseList1(head1)
-	rHead := reverseList1(head1)
+	//rHead := reverseList2(head1)
+	rHead := reverseList3(head1)
 	TraverseSingleList(rHead)
 }
