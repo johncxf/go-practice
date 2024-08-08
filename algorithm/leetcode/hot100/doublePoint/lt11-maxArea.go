@@ -7,19 +7,18 @@ import (
 
 // 双指针
 func maxArea(height []int) int {
-	n := len(height)
-	left, right, max := 0, n-1, 0
-	for left < right {
-		tmp := 0
-		if height[left] < height[right] {
-			tmp = height[left] * (right - left)
-			left++
+	max, l, r := 0, 0, len(height)-1
+	for l < r {
+		h := height[l]
+		if height[l] > height[r] {
+			h = height[r]
+			r--
 		} else {
-			tmp = height[right] * (right - left)
-			right--
+			l++
 		}
-		if tmp > max {
-			max = tmp
+		area := (r - l + 1) * h
+		if area > max {
+			max = area
 		}
 	}
 	return max

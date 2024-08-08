@@ -6,7 +6,9 @@ import (
 	"sort"
 )
 
-// 哈希表
+// 排序+哈希表
+// - 时间复杂度：O(nklogk)
+// - 空间复杂度：O(nk)
 func groupAnagrams(strs []string) [][]string {
 	hash := map[string][]string{}
 	for _, str := range strs {
@@ -27,6 +29,27 @@ func groupAnagrams(strs []string) [][]string {
 	return ans
 }
 
+// 计数+哈希表
+// - 时间复杂度：O(n(k+∣Σ∣))，n 是 strs 中的字符串的数量，k 是 strs 中的字符串的的最大长度，Σ 是字符集
+// - 空间复杂度：O(n(k+∣Σ∣))
+func groupAnagrams2(strs []string) [][]string {
+	hash := map[[26]int][]string{}
+	for _, str := range strs {
+		cnt := [26]int{}
+		for _, ch := range str {
+			cnt[ch-'a']++
+		}
+		hash[cnt] = append(hash[cnt], str)
+	}
+	var ans [][]string
+	for _, v := range hash {
+		ans = append(ans, v)
+	}
+	return ans
+}
+
 func main() {
 	fmt.Println(groupAnagrams([]string{"eat", "tea", "tan", "ate", "nat", "bat"}))
+
+	fmt.Println(groupAnagrams2([]string{"eat", "tea", "tan", "ate", "nat", "bat"}))
 }

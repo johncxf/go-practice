@@ -4,23 +4,19 @@ import "fmt"
 
 // [L3-中等] 无重复字符的最长子串
 func lengthOfLongestSubstring(s string) int {
-	n := len(s)
-	right, max := 0, 0
-	// hash map，存储不重复的字符串，用于判断字符串是否出现过
-	hash := make(map[byte]int)
-	for i := 0; i < n; i++ {
-		// 除了 i = 0 第一次，每一次移动左指针的时候都需要删除第一个hash元素
-		if i != 0 {
-			delete(hash, s[i-1])
+	max := 0
+	// 记录当前窗口所有元素出现次数
+	count := map[byte]int{}
+	for l, r := 0, 0; r < len(s); r++ {
+		count[s[r]]++
+		// 当出现重复元素时，移动左指针，直到没有元素重复
+		for count[s[r]] > 1 {
+			count[s[l]]--
+			l++
 		}
-		// 不断移动右指针，直到出现重复字符退出
-		for right < n && hash[s[right]] == 0 {
-			hash[s[right]]++
-			right++
-		}
-		// 更新最大值
-		if right-i > max {
-			max = right - i
+		// 计算当前窗口最大值并更新
+		if r-l+1 > max {
+			max = r - l + 1
 		}
 	}
 	return max

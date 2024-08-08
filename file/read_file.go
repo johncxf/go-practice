@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	filePath := "tmp/data.txt"
+	filePath := "tmp/data.json"
 	content, err := os.ReadFile(filePath)
 	if err != nil {
 		log.Fatal(err)

@@ -6,24 +6,15 @@ import "fmt"
 // 冒泡排序
 // 时间复杂度：O(n^2)
 // 空间复杂度：O(1)
-func bubbleSort(arr []int) []int {
-	count := len(arr)
-	if 1 >= count {
-		return arr
-	}
-	for i := 0; i < count; i++ {
-		for j := 0; j < count-1; j++ {
-			// 从小到大
-			if arr[j] > arr[j+1] {
-				arr[j], arr[j+1] = arr[j+1], arr[j]
+func bubbleSort(nums []int) {
+	for i := len(nums) - 1; i >= 0; i-- {
+		// 内循环：将 [0, i] 元素中最大值换到最右边
+		for j := 0; j < i; j++ {
+			if nums[j] > nums[j+1] {
+				nums[j], nums[j+1] = nums[j+1], nums[j]
 			}
-			// 从大到小
-			// if arr[j] < arr[j+1] {
-			// 	arr[j], arr[j+1] = arr[j+1], arr[j]
-			// }
 		}
 	}
-	return arr
 }
 
 // 选择排序
@@ -62,31 +53,30 @@ func insertSort(arr []int) {
 // 快速排序
 // 时间复杂度：O(nlog2n)，最差：O(n^2)
 // 空间复杂度：O(n)，最差：O(log2n)
-func quickSort(arr []int, left int, right int) {
+func quickSort(nums []int, left int, right int) {
 	if left > right {
 		return
 	}
-	temp := arr[left]
-	i := left
-	j := right
+	base := nums[left]
+	i, j := left, right
 	for i != j {
-		// 哨兵 j 向左移动，查找小于基准数 temp 时停下
-		for arr[j] >= temp && i < j {
+		// 哨兵 j 向左移动，查找小于基准数 base 时停下
+		for nums[j] >= base && i < j {
 			j--
 		}
-		// 哨兵 i 向右移动，查找大于基准数 temp 时停下
-		for arr[i] <= temp && i < j {
+		// 哨兵 i 向右移动，查找大于基准数 base 时停下
+		for nums[i] <= base && i < j {
 			i++
 		}
 		// 交换 i、j 位置
 		if i < j {
-			arr[i], arr[j] = arr[j], arr[i]
+			nums[i], nums[j] = nums[j], nums[i]
 		}
 	}
 	// 将基准数归位
-	arr[left], arr[i] = arr[i], arr[left]
-	quickSort(arr, left, i-1)
-	quickSort(arr, j+1, right)
+	nums[left], nums[i] = nums[i], nums[left]
+	quickSort(nums, left, i-1)
+	quickSort(nums, j+1, right)
 }
 
 // 归并排序
@@ -192,10 +182,36 @@ func bucketSort(nums []int) []int {
 	return ans
 }
 
+// 计数排序（适用整数数组）
+func countingSort(nums []int) []int {
+	// 计算出数组中最大元素
+	max := nums[0]
+	for i := 1; i < len(nums); i++ {
+		if nums[i] > max {
+			max = nums[i]
+		}
+	}
+	// counter[num] 代表 num 的出现次数
+	counter := make([]int, max+1)
+	for _, num := range nums {
+		counter[num]++
+	}
+	// 遍历 counter
+	var ans []int
+	for i, v := range counter {
+		for v > 0 {
+			ans = append(ans, i)
+			v--
+		}
+	}
+	return ans
+}
+
 func main() {
 	fmt.Println("冒泡排序：")
 	arr1 := []int{4, 5, 6, 7, 8, 3, 2, 1}
-	fmt.Println(bubbleSort(arr1))
+	bubbleSort(arr1)
+	fmt.Println(arr1)
 
 	fmt.Println("选择排序：")
 	arr2 := []int{4, 5, 6, 7, 8, 3, 2, 1}
@@ -224,4 +240,8 @@ func main() {
 	fmt.Println("桶排序：")
 	arr7 := []int{4, 5, 6, 7, 8, 3, 2, 1}
 	fmt.Println(bucketSort(arr7))
+
+	fmt.Println("计数排序：")
+	arr8 := []int{4, 5, 6, 7, 8, 3, 2, 1}
+	fmt.Println(countingSort(arr8))
 }
