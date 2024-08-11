@@ -4,6 +4,8 @@ package main
 import "fmt"
 
 // 暴力
+// - 时间复杂度：O(mn)
+// - 空间复杂度：O(1)
 func searchMatrix1(matrix [][]int, target int) bool {
 	for _, row := range matrix {
 		for _, col := range row {
@@ -15,8 +17,32 @@ func searchMatrix1(matrix [][]int, target int) bool {
 	return false
 }
 
-// Z 字查找
+// 对每一行进行二分查找（也可以对每一列）
+// - 时间复杂度：O(mlogn)
+// - 空间复杂度：O(1)
 func searchMatrix2(matrix [][]int, target int) bool {
+	m, n := len(matrix), len(matrix[0])
+	// 对每一行进行二分查找（也可以对每一列）
+	for i := 0; i < m; i++ {
+		l, r := 0, n-1
+		for l <= r {
+			mid := (l + r) / 2
+			if matrix[i][mid] == target {
+				return true
+			} else if matrix[i][mid] < target {
+				l = mid + 1
+			} else {
+				r = mid - 1
+			}
+		}
+	}
+	return false
+}
+
+// Z 字查找
+// - 时间复杂度：O(m+n)
+// - 空间复杂度：O(1)
+func searchMatrix3(matrix [][]int, target int) bool {
 	m, n := len(matrix), len(matrix[0])
 	x, y := 0, n-1
 	for x < m && y >= 0 {

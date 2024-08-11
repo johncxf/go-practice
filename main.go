@@ -19,4 +19,5 @@ func main() {
 	arr := make([]int, 26)
 	arr[25] = 1
 	fmt.Println(arr)
+	fmt.Println(int(1e5))
 }

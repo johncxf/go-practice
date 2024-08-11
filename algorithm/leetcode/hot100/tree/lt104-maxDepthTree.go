@@ -6,7 +6,9 @@ import (
 	. "go_practice/pkg/datastruct"
 )
 
-// 递归
+// 深度优先搜索
+// - 时间复杂度：O(N)
+// - 空间复杂度：O(height) 二叉树深度
 func maxDepth(root *TreeNode) int {
 	if root == nil {
 		return 0
@@ -19,6 +21,31 @@ func max(a, b int) int {
 		return a
 	}
 	return b
+}
+
+// 广度优先搜索
+// - 时间复杂度：O(N)
+// - 空间复杂度：O(N)
+func maxDepth2(root *TreeNode) int {
+	if root == nil {
+		return 0
+	}
+	ans := 0
+	q := []*TreeNode{root}
+	for len(q) > 0 {
+		p := make([]*TreeNode, 0)
+		for _, node := range q {
+			if node.Left != nil {
+				p = append(p, node.Left)
+			}
+			if node.Right != nil {
+				p = append(p, node.Right)
+			}
+		}
+		ans++
+		q = p
+	}
+	return ans
 }
 
 func main() {
@@ -36,4 +63,5 @@ func main() {
 	node4.Right = NewTreeNode(8)
 
 	fmt.Println(maxDepth(node1))
+	fmt.Println(maxDepth2(node1))
 }
