@@ -5,21 +5,18 @@ import "fmt"
 
 // 二分查找
 func searchInsert(nums []int, target int) int {
-	n := len(nums)
-	left, right := 0, n-1
-	insert := n
+	left, right := 0, len(nums)-1
 	for left <= right {
 		mid := (right + left) / 2
 		if target == nums[mid] { // 找到
 			return mid
 		} else if target < nums[mid] { // 目标值小于中间值，且找不到
-			insert = mid
 			right = mid - 1
 		} else { // 目标值大于中间值，且找不到
 			left = mid + 1
 		}
 	}
-	return insert
+	return left
 }
 
 func main() {
